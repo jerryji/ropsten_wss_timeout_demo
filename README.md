@@ -7,6 +7,10 @@
 pip3 install -r requirements.txt
 ```
 
+```bash
+export PROJECT_ID=...
+```
+
 
 ## Run
 
