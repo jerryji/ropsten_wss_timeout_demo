@@ -1,0 +1,8 @@
+{
+  "name": "ropstenWssTimeoutDemo",
+  "version": "0.0.1",
+  "description": "",
+  "dependencies": {
+    "web3": "^1.0.0-beta.52"
+  }
+}
