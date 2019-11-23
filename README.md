@@ -5,6 +5,7 @@
 
 ```bash
 pip3 install -r requirements.txt
+
 npm install
 ```
 
@@ -15,12 +16,18 @@ export PROJECT_ID=<Your Infura Project ID>
 
 ## Run
 
+Same implementation, returns events in web3.js, timeout in web3.py --
+
 ```bash
 node ropstenWssTimeoutDemo.js
+
 python3 ropsten_wss_timeout_demo.py
 ```
 
+In addition, ropsten_wss_timeout_demo2.py shows timeout behavior difference within web3.py for from_block just 100 apart --
 
-## Output
+```bash
+python3 ropsten_wss_timeout_demo2.py
+```
 
-ropstenWssTimeoutDemo.js will return events, while ropsten_wss_timeout_demo.py will timeout
+* Note: The two events, EthUpdate and BrickTransfer, are generated from the same function
