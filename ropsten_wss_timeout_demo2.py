@@ -1,3 +1,4 @@
+#shows web3.py works when toBlock - fromBlock <= 112, but timeout when toBlock - fromBlock > 112
 import os
 import sys
 import json
@@ -26,21 +27,20 @@ w3 = web3.Web3(WebsocketProvider(ROPSTEN_ENDPOINT, websocket_timeout=WEBSOCKET_T
 contract = w3.eth.contract(address=Contract_Address, abi=contract_abi)
 
 tests = OrderedDict() # {from_block: message}
-tests[6807500] = 'Both BrickTransfer and EthUpdate succeed'
-tests[6807400] = 'BrickTransfer succeeds, but EthUpdate will timeout'
-#tests[6807300] = 'Both will timeout'
+tests[6807400] = 'works when toBlock-fromBlock <= 112, timeout when toBlock-fromBlock > 112'
 
 for from_block, msg in tests.items():
     print(f'fromBlock={from_block}, {msg}', flush=True)
 
-    event_filter = contract.events.BrickTransfer.createFilter(fromBlock=from_block)
+    print('when toBlock-fromBlock <= 112')
+    event_filter = contract.events.EthUpdate.createFilter(fromBlock=from_block, toBlock=from_block+112)
     all_entries = event_filter.get_all_entries()
-    for event in all_entries[:3]:
-        print(f'BrickTransfer event transactionHash {event.transactionHash.hex()}', flush=True)
+    for event in all_entries[:2]:
+        print(f'EthUpdate event transactionHash {event.transactionHash.hex()}', flush=True)
     print()
 
-    event_filter = contract.events.EthUpdate.createFilter(fromBlock=from_block)
+    print('when toBlock-fromBlock > 112')
+    event_filter = contract.events.EthUpdate.createFilter(fromBlock=from_block, toBlock=from_block+113)
     all_entries = event_filter.get_all_entries()
     for event in all_entries[:3]:
         print(f'EthUpdate event transactionHash {event.transactionHash.hex()}', flush=True)
-    print()

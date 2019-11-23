@@ -24,10 +24,9 @@ node ropstenWssTimeoutDemo.js
 python3 ropsten_wss_timeout_demo.py
 ```
 
-In addition, ropsten_wss_timeout_demo2.py shows timeout behavior difference within web3.py for from_block just 100 apart --
+In addition, ropsten_wss_timeout_demo2.py shows web3.py works when toBlock - fromBlock <= 112,
+but timeout when toBlock - fromBlock > 112
 
 ```bash
 python3 ropsten_wss_timeout_demo2.py
 ```
-
-* Note: The two events, EthUpdate and BrickTransfer, are generated from the same function
